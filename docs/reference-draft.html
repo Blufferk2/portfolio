@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dídac Soler — Design Engineer</title>
+    <meta name="description" content="Design Engineer — 20+ años diseñando, ahora también construyendo.">
+    
+    <style>
+        /* ============================================
+           PORTFOLIO — Refined Craft Edition
+           ============================================ */
+
+        :root {
+            --bg: #FAFAFA;
+            --text: #111111;
+            --text-secondary: #555555;
+            --text-muted: #888888;
+            --border: rgba(0, 0, 0, 0.08);
+            --max-width: 44rem;
+            
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --duration-fast: 150ms;
+            --duration-base: 250ms;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 0 1.5rem;
+            overflow-x: hidden;
+        }
+
+        /* Subtle noise */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            opacity: 0.02;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        ::selection {
+            background: var(--text);
+            color: var(--bg);
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 4rem 0 6rem;
+        }
+
+        /* ---------- HEADER ---------- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 5rem;
+        }
+
+        .name {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color var(--duration-fast) var(--ease-out);
+        }
+
+        nav a:hover { color: var(--text); }
+
+        /* ---------- HERO WITH ASCII ART ---------- */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 3rem;
+            align-items: start;
+            margin-bottom: 5rem;
+            min-height: 200px;
+        }
+
+        .hero-content {
+            max-width: 32rem;
+        }
+
+        .hero-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .hero-title {
+            font-size: 1.375rem;
+            font-weight: 400;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-meta {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            font-family: 'SF Mono', Monaco, monospace;
+        }
+
+        /* ASCII Canvas */
+        .ascii-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+
+        .ascii-art {
+            font-family: 'SF Mono', Monaco, 'Consolas', monospace;
+            font-size: 8px;
+            line-height: 1;
+            white-space: pre;
+            color: var(--text);
+            opacity: 0.7;
+            user-select: none;
+        }
+
+        /* ---------- SECTION ---------- */
+        section {
+            margin-bottom: 4rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+        }
+
+        .section-count {
+            font-size: 0.6875rem;
+            color: var(--text-muted);
+            font-family: 'SF Mono', Monaco, monospace;
+        }
+
+        /* ---------- EXPLORATIONS ---------- */
+        .explorations {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .exploration {
+            display: grid;
+            grid-template-columns: 1fr 180px;
+            gap: 2rem;
+            align-items: center;
+            padding: 1.5rem;
+            background: var(--bg);
+            transition: background var(--duration-fast) var(--ease-out);
+            cursor: default;
+        }
+
+        .exploration:hover {
+            background: rgba(0,0,0,0.015);
+        }
+
+        .exploration-info h3 {
+            font-size: 0.9375rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .exploration-info p {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+        }
+
+        .exploration-demo {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.02);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* ============================================
+           DEMO 1: Breathing Text
+           ============================================ */
+        .breathing-text {
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            animation: breathe 4s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+            0%, 100% { 
+                letter-spacing: 0.3em; 
+                opacity: 0.4;
+            }
+            50% { 
+                letter-spacing: 0.5em; 
+                opacity: 1;
+            }
+        }
+
+        /* ============================================
+           DEMO 2: Live Clock
+           ============================================ */
+        .live-clock {
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 24px;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .live-clock .separator {
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* ============================================
+           DEMO 3: Force Field
+           ============================================ */
+        .field-canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* ============================================
+           DEMO 4: Signature
+           ============================================ */
+        .signature-svg {
+            width: 160px;
+            height: 60px;
+        }
+
+        .signature-path {
+            stroke-dasharray: 300;
+            stroke-dashoffset: 300;
+            transition: stroke-dashoffset 1.5s ease-out;
+        }
+
+        .exploration:hover .signature-path {
+            stroke-dashoffset: 0;
+        }
+
+        /* ============================================
+           DEMO 5: Dissolve
+           ============================================ */
+        .dissolve-canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* ============================================
+           DEMO 6: Gravity Letters
+           ============================================ */
+        .gravity-container {
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            gap: 3px;
+            height: 60px;
+            align-items: flex-end;
+        }
+
+        .gravity-letter {
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .exploration:hover .gravity-letter {
+            transform: translateY(calc(var(--drop) * -1px));
+        }
+
+        /* ---------- ABOUT ---------- */
+        .about-text {
+            font-size: 1rem;
+            max-width: 50ch;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            padding: 0.375rem 0.75rem;
+            background: rgba(0,0,0,0.03);
+            border-radius: 100px;
+        }
+
+        /* ---------- FOOTER ---------- */
+        footer {
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color var(--duration-fast) var(--ease-out);
+        }
+
+        .footer-links a:hover { color: var(--text); }
+
+        .footer-meta {
+            font-size: 0.6875rem;
+            color: var(--text-muted);
+            font-family: 'SF Mono', Monaco, monospace;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+            
+            .ascii-container {
+                display: none;
+            }
+            
+            .exploration {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .exploration-demo {
+                height: 100px;
+            }
+        }
+
+        /* ---------- REDUCED MOTION ---------- */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <span class="name">Dídac Soler</span>
+            <nav>
+                <a href="#lab">Lab</a>
+                <a href="#about">About</a>
+                <a href="/cdn-cgi/l/email-protection#f2969b969391819d9e9780b2959f939b9edc919d9f">Contact</a>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <div class="hero-content">
+                <p class="hero-label">Design Engineer</p>
+                <h1 class="hero-title">
+                    Crafting interfaces where design and code converge. 
+                    20+ years of visual design, now learning to build.
+                </h1>
+                <p class="hero-meta">Barcelona · 2026</p>
+            </div>
+            <div class="ascii-container">
+                <div class="ascii-art" id="ascii-hero"></div>
+            </div>
+        </section>
+
+        <section id="lab">
+            <div class="section-header">
+                <h2 class="section-title">Interface Lab</h2>
+                <span class="section-count">6 experiments</span>
+            </div>
+            
+            <div class="explorations">
+                <!-- 1. Breathing Text -->
+                <div class="exploration">
+                    <div class="exploration-info">
+                        <h3>Breathing Type</h3>
+                        <p>Typography that inhales and exhales</p>
+                    </div>
+                    <div class="exploration-demo">
+                        <div class="breathing-text" id="breathing">DESIGN</div>
+                    </div>
+                </div>
+
+                <!-- 2. Live Clock -->
+                <div class="exploration">
+                    <div class="exploration-info">
+                        <h3>Now</h3>
+                        <p>This exact moment, typeset</p>
+                    </div>
+                    <div class="exploration-demo">
+                        <div class="live-clock" id="clock"></div>
+                    </div>
+                </div>
+
+                <!-- 3. Magnetic Field -->
+                <div class="exploration" id="field-exp">
+                    <div class="exploration-info">
+                        <h3>Force Field</h3>
+                        <p>Particles react to your presence</p>
+                    </div>
+                    <div class="exploration-demo">
+                        <canvas class="field-canvas" id="field"></canvas>
+                    </div>
+                </div>
+
+                <!-- 4. Signature -->
+                <div class="exploration">
+                    <div class="exploration-info">
+                        <h3>Autograph</h3>
+                        <p>A signature draws itself</p>
+                    </div>
+                    <div class="exploration-demo">
+                        <svg class="signature-svg" viewBox="0 0 160 60" id="signature">
+                            <path class="signature-path" id="sig-path" d="M20,45 Q30,20 45,35 T70,30 Q85,25 95,40 T120,35 Q135,30 145,38" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- 5. Pixel Dissolve -->
+                <div class="exploration" id="dissolve-exp">
+                    <div class="exploration-info">
+                        <h3>Dissolve</h3>
+                        <p>Matter becoming data</p>
+                    </div>
+                    <div class="exploration-demo">
+                        <canvas class="dissolve-canvas" id="dissolve"></canvas>
+                    </div>
+                </div>
+
+                <!-- 6. Gravity Letters -->
+                <div class="exploration" id="gravity-exp">
+                    <div class="exploration-info">
+                        <h3>Gravity</h3>
+                        <p>Letters obey physics</p>
+                    </div>
+                    <div class="exploration-demo">
+                        <div class="gravity-container" id="gravity"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="section-header">
+                <h2 class="section-title">About</h2>
+            </div>
+            <p class="about-text">
+                Creative Director with 20+ years in graphic design, branding, and art direction. 
+                Transitioning into Design Engineering because I believe the best design is built, not just delivered.
+            </p>
+            <div class="skills-list">
+                <span class="skill">Visual Design</span>
+                <span class="skill">UI/UX</span>
+                <span class="skill">Design Systems</span>
+                <span class="skill">HTML/CSS</span>
+                <span class="skill">JavaScript</span>
+                <span class="skill">React</span>
+                <span class="skill">Motion</span>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-links">
+                <a href="https://twitter.com/k2di" target="_blank">Twitter</a>
+                <a href="https://github.com/blufferk2" target="_blank">GitHub</a>
+                <a href="/cdn-cgi/l/email-protection#e3878a878280908c8f8691a3848e828a8fcd808c8e">Email</a>
+            </div>
+            <span class="footer-meta">Press S for sound</span>
+        </footer>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        /* ============================================
+           ASCII TORUS/DONUT - Hero
+           Classic donut.c inspired
+           ============================================ */
+        (() => {
+            const output = document.getElementById('ascii-hero');
+            if (!output) return;
+            
+            const width = 50;
+            const height = 25;
+            const chars = '.,-~:;=!*#$@';
+            
+            let A = 0, B = 0;
+            
+            function render() {
+                const z = new Array(width * height).fill(0);
+                const b = new Array(width * height).fill(' ');
+                
+                for (let j = 0; j < 6.28; j += 0.07) {
+                    for (let i = 0; i < 6.28; i += 0.02) {
+                        const c = Math.sin(i);
+                        const d = Math.cos(j);
+                        const e = Math.sin(A);
+                        const f = Math.sin(j);
+                        const g = Math.cos(A);
+                        const h = d + 2;
+                        const D = 1 / (c * h * e + f * g + 5);
+                        const l = Math.cos(i);
+                        const m = Math.cos(B);
+                        const n = Math.sin(B);
+                        const t = c * h * g - f * e;
+                        
+                        const x = Math.floor(width/2 + 30 * D * (l * h * m - t * n));
+                        const y = Math.floor(height/2 + 15 * D * (l * h * n + t * m));
+                        const o = x + width * y;
+                        const N = Math.floor(8 * ((f * e - c * d * g) * m - c * d * e - f * g - l * d * n));
+                        
+                        if (y > 0 && y < height && x > 0 && x < width && D > z[o]) {
+                            z[o] = D;
+                            b[o] = chars[Math.max(0, N)];
+                        }
+                    }
+                }
+                
+                let result = '';
+                for (let k = 0; k < width * height; k++) {
+                    result += k % width === width - 1 ? '\n' : b[k];
+                }
+                output.textContent = result;
+                
+                A += 0.015;
+                B += 0.008;
+                
+                requestAnimationFrame(render);
+            }
+            
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                render();
+            }
+        })();
+
+        /* ============================================
+           LIVE CLOCK
+           ============================================ */
+        (() => {
+            const clock = document.getElementById('clock');
+            if (!clock) return;
+            
+            function update() {
+                const now = new Date();
+                const h = String(now.getHours()).padStart(2, '0');
+                const m = String(now.getMinutes()).padStart(2, '0');
+                const s = String(now.getSeconds()).padStart(2, '0');
+                clock.innerHTML = `${h}<span class="separator">:</span>${m}<span class="separator">:</span>${s}`;
+            }
+            
+            update();
+            setInterval(update, 1000);
+        })();
+
+        /* ============================================
+           FORCE FIELD
+           ============================================ */
+        (() => {
+            const canvas = document.getElementById('field');
+            const container = document.getElementById('field-exp');
+            if (!canvas || !container) return;
+            
+            const ctx = canvas.getContext('2d');
+            canvas.width = 180;
+            canvas.height = 80;
+            
+            const dots = [];
+            const gridSize = 12;
+            
+            for (let x = gridSize; x < 180; x += gridSize) {
+                for (let y = gridSize; y < 80; y += gridSize) {
+                    dots.push({ ox: x, oy: y, x, y });
+                }
+            }
+            
+            let mouse = { x: -100, y: -100 };
+            
+            container.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                mouse.x = e.clientX - rect.left;
+                mouse.y = e.clientY - rect.top;
+            });
+            
+            container.addEventListener('mouseleave', () => {
+                mouse = { x: -100, y: -100 };
+            });
+            
+            function animate() {
+                ctx.clearRect(0, 0, 180, 80);
+                
+                dots.forEach(dot => {
+                    const dx = mouse.x - dot.ox;
+                    const dy = mouse.y - dot.oy;
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+                    const force = Math.max(0, 30 - dist) / 30;
+                    
+                    dot.x = dot.ox + dx * force * 0.3;
+                    dot.y = dot.oy + dy * force * 0.3;
+                    
+                    ctx.beginPath();
+                    ctx.arc(dot.x, dot.y, 1.5 + force * 2, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(17,17,17,${0.3 + force * 0.5})`;
+                    ctx.fill();
+                });
+                
+                requestAnimationFrame(animate);
+            }
+            
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                animate();
+            }
+        })();
+
+        /* ============================================
+           DISSOLVE
+           ============================================ */
+        (() => {
+            const canvas = document.getElementById('dissolve');
+            const container = document.getElementById('dissolve-exp');
+            if (!canvas || !container) return;
+            
+            const ctx = canvas.getContext('2d');
+            canvas.width = 180;
+            canvas.height = 80;
+            
+            const pixels = [];
+            const size = 4;
+            
+            // Create a square that will dissolve
+            for (let x = 60; x < 120; x += size) {
+                for (let y = 20; y < 60; y += size) {
+                    pixels.push({
+                        x, y,
+                        ox: x, oy: y,
+                        vx: 0, vy: 0,
+                        dissolved: false
+                    });
+                }
+            }
+            
+            let isHovering = false;
+            
+            container.addEventListener('mouseenter', () => {
+                isHovering = true;
+                pixels.forEach(p => {
+                    p.vx = (Math.random() - 0.5) * 4;
+                    p.vy = (Math.random() - 0.5) * 4;
+                    p.dissolved = true;
+                });
+            });
+            
+            container.addEventListener('mouseleave', () => {
+                isHovering = false;
+                pixels.forEach(p => p.dissolved = false);
+            });
+            
+            function animate() {
+                ctx.clearRect(0, 0, 180, 80);
+                
+                pixels.forEach(p => {
+                    if (p.dissolved) {
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        p.vx *= 0.98;
+                        p.vy *= 0.98;
+                    } else {
+                        p.x += (p.ox - p.x) * 0.1;
+                        p.y += (p.oy - p.y) * 0.1;
+                    }
+                    
+                    ctx.fillStyle = 'rgba(17,17,17,0.8)';
+                    ctx.fillRect(p.x, p.y, size - 1, size - 1);
+                });
+                
+                requestAnimationFrame(animate);
+            }
+            
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                animate();
+            }
+        })();
+
+        /* ============================================
+           GRAVITY LETTERS
+           ============================================ */
+        (() => {
+            const container = document.getElementById('gravity');
+            if (!container) return;
+            
+            const word = 'CRAFT';
+            
+            word.split('').forEach((char, i) => {
+                const span = document.createElement('span');
+                span.className = 'gravity-letter';
+                span.textContent = char;
+                span.style.setProperty('--drop', 20 + Math.random() * 25);
+                span.style.transitionDelay = `${i * 50}ms`;
+                container.appendChild(span);
+            });
+        })();
+
+        /* ============================================
+           SOUND SYSTEM
+           ============================================ */
+        const Sound = (() => {
+            let ctx, enabled = localStorage.getItem('sound') !== 'off';
+            const getCtx = () => {
+                if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+                if (ctx.state === 'suspended') ctx.resume();
+                return ctx;
+            };
+            
+            const tick = () => {
+                if (!enabled) return;
+                const c = getCtx(), t = c.currentTime;
+                const buf = c.createBuffer(1, c.sampleRate * 0.003, c.sampleRate);
+                const d = buf.getChannelData(0);
+                for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.exp(-i / 15);
+                const src = c.createBufferSource(); src.buffer = buf;
+                const flt = c.createBiquadFilter(); flt.type = 'bandpass'; flt.frequency.value = 5500; flt.Q.value = 5;
+                const g = c.createGain(); g.gain.setValueAtTime(0.04, t); g.gain.exponentialRampToValueAtTime(0.001, t + 0.02);
+                src.connect(flt); flt.connect(g); g.connect(c.destination);
+                src.start(t); src.stop(t + 0.02);
+            };
+            
+            const click = () => {
+                if (!enabled) return;
+                const c = getCtx(), t = c.currentTime;
+                const buf = c.createBuffer(1, c.sampleRate * 0.005, c.sampleRate);
+                const d = buf.getChannelData(0);
+                for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.exp(-i / 25);
+                const src = c.createBufferSource(); src.buffer = buf;
+                const flt = c.createBiquadFilter(); flt.type = 'bandpass'; flt.frequency.value = 4000; flt.Q.value = 3;
+                const g = c.createGain(); g.gain.setValueAtTime(0.1, t); g.gain.exponentialRampToValueAtTime(0.001, t + 0.03);
+                src.connect(flt); flt.connect(g); g.connect(c.destination);
+                src.start(t); src.stop(t + 0.03);
+            };
+            
+            const toggle = () => {
+                enabled = !enabled;
+                localStorage.setItem('sound', enabled ? 'on' : 'off');
+                console.log('🔊 Sound ' + (enabled ? 'on' : 'off'));
+            };
+            
+            return { tick, click, toggle };
+        })();
+
+        document.querySelectorAll('.exploration, nav a, .footer-links a').forEach(el => {
+            el.addEventListener('mouseenter', Sound.tick);
+            el.addEventListener('mousedown', Sound.click);
+  

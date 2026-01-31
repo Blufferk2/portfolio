@@ -1,65 +1,106 @@
-import Image from "next/image";
+import { Dual, DualityToggle } from "@/components/duality";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
+    <div className="min-h-screen bg-[var(--bg)] transition-colors duration-[var(--duration-base)]">
+      <main className="mx-auto max-w-[var(--max-width)] px-6 py-16">
+        {/* Header */}
+        <header className="mb-20 flex items-baseline justify-between">
+          <span className="text-base font-semibold text-[var(--text)]">
+            Dídac Soler
+          </span>
+          <nav className="flex gap-6">
             <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              href="#lab"
+              className="text-sm text-[var(--text-secondary)] transition-colors hover:text-[var(--text)]"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
+              Lab
+            </a>
             <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              href="#about"
+              className="text-sm text-[var(--text-secondary)] transition-colors hover:text-[var(--text)]"
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+              About
+            </a>
+            <a
+              href="#contact"
+              className="text-sm text-[var(--text-secondary)] transition-colors hover:text-[var(--text)]"
+            >
+              Contact
+            </a>
+          </nav>
+        </header>
+
+        {/* Hero */}
+        <section className="mb-20">
+          <p className="mb-4 text-xs font-medium uppercase tracking-widest text-[var(--text-muted)]">
+            <Dual
+              official="Design Engineer"
+              honest="Pixel Pusher Since 2004"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+          </p>
+          <h1 className="mb-6 max-w-xl text-xl font-normal leading-relaxed text-[var(--text)]">
+            <Dual
+              official="Crafting interfaces where design and code converge. 20+ years of visual design, now learning to build."
+              honest="Llevo 20 años moviendo píxeles de un lado a otro. Ahora también escribo código para moverlos más rápido."
+            />
+          </h1>
+          <p className="font-mono text-xs text-[var(--text-muted)]">
+            Barcelona · 2026
+          </p>
+        </section>
+
+        {/* About preview */}
+        <section id="about" className="mb-20">
+          <h2 className="mb-6 text-[11px] font-semibold uppercase tracking-widest text-[var(--text-muted)]">
+            About
+          </h2>
+          <p className="max-w-lg leading-relaxed text-[var(--text)]">
+            <Dual
+              official="Creative Director with 20+ years in graphic design, branding, and art direction. Transitioning into Design Engineering because I believe the best design is built, not just delivered."
+              honest="He hecho de todo: logos, webs, apps, branding... Ahora me he cansado de entregar Figmas y esperar a que alguien los construya mal. Así que lo hago yo."
+            />
+          </p>
+        </section>
+
+        {/* Skills */}
+        <section className="mb-20">
+          <h2 className="mb-6 text-[11px] font-semibold uppercase tracking-widest text-[var(--text-muted)]">
+            <Dual official="Skills" honest="Cosas que sé hacer" />
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {[
+              { official: "Visual Design", honest: "Hacer cosas bonitas" },
+              { official: "UI/UX", honest: "Botones y formularios" },
+              { official: "Design Systems", honest: "Obsesión por consistencia" },
+              { official: "HTML/CSS", honest: "Divs y más divs" },
+              { official: "JavaScript", honest: "console.log debugging" },
+              { official: "React", honest: "useState everywhere" },
+              { official: "Motion", honest: "Animaciones innecesarias" },
+            ].map((skill, i) => (
+              <span
+                key={i}
+                className="rounded-full bg-[var(--text)]/[0.03] px-3 py-1.5 text-xs text-[var(--text-muted)]"
+              >
+                <Dual official={skill.official} honest={skill.honest} />
+              </span>
+            ))}
+          </div>
+        </section>
+
+        {/* Footer hint */}
+        <footer className="border-t border-[var(--border)] pt-8">
+          <p className="font-mono text-[11px] text-[var(--text-muted)]">
+            <Dual
+              official="Press D to toggle mode"
+              honest="Pulsa D para ver la verdad"
+            />
+          </p>
+        </footer>
       </main>
+
+      {/* Toggle button */}
+      <DualityToggle />
     </div>
   );
 }
